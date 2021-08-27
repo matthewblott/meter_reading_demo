@@ -6,12 +6,9 @@ namespace Ensek.Application.Account.Commands
   using FluentValidation;
   using MediatR;
   using System.Collections.Generic;
-  using System.Linq;
   using System.Security.Claims;
   using System.Security.Principal;
-  using AutoMapper;
   using Common.Interfaces;
-  using Microsoft.AspNet.Identity;
   using Microsoft.AspNetCore.Authentication.Cookies;
 
   public class Login
@@ -30,61 +27,22 @@ namespace Ensek.Application.Account.Commands
     public class Handler : IRequestHandler<Command, IPrincipal>
     {
       private readonly IEnsekDbContext _db;
-      private readonly IMapper _mapper;
-      private readonly IPasswordHasher _passwordHasher;
 
-      public Handler(IEnsekDbContext db, IMapper mapper, IPasswordHasher passwordHasher)
-      {
-        _db = db;
-        _mapper = mapper;
-        _passwordHasher = passwordHasher;
-      }
+      public Handler(IEnsekDbContext db) => _db = db;
 
       public Task<IPrincipal> Handle(Command command, CancellationToken cancellationToken)
       {
-        // todo: this should be executed in infrastructure and called here using an interface 
-        
-        var any = _db.Users.Any(u => u.Username == command.Username);
-        
-        if (!any)
+        if (command.Username != "admin" || command.Password != "password")
         {
           throw new Exception();
         }
-
-        var user = _db.Users.Single(u => u.Username == command.Username);
-
-        // if (!_passwordHasher.VerifyHashedPassword(user.Password, command.Password))
-        // {
-        //   throw new Exception();
-        // }
-        
-        if (user.Password != command.Password)
-        {
-          throw new Exception();
-        }
-
-        const string admins = "Admins";
-        const string superUsers = "SuperUsers";
         
         var claims = new List<Claim>
         {
-          new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), 
-          new Claim(ClaimTypes.Name, user.Username),
+          new Claim(ClaimTypes.NameIdentifier, "admin"), 
+          new Claim(ClaimTypes.Name, "admin"),
+          new Claim(ClaimTypes.Role, "Admins"),
         };
-
-        var isAdmin = user.UserRoles.Any(ug => ug.Role.Name == admins);
-
-        if (isAdmin)
-        {
-          claims.Add(new Claim(ClaimTypes.Role, admins));
-        }
-        
-        var isSuperUser = user.UserRoles.Any(ug => ug.Role.Name == superUsers);
-
-        if (isSuperUser)
-        {
-          claims.Add(new Claim(ClaimTypes.Role, superUsers));
-        }
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         

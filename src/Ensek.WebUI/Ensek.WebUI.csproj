@@ -27,5 +27,12 @@
     <_ContentIncludedByDefault Remove="Features\Suppliers\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="Features\Suppliers\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Features\Suppliers\_Fields.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Categories\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Categories\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Categories\New.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Customers\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Customers\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Customers\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Customers\PostTest.cshtml" />
   </ItemGroup>
 </Project>

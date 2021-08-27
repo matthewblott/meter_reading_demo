@@ -44,14 +44,9 @@ namespace Ensek.Application.Products.Commands
         var entity = await _db.Products
           .FindAsync(command.Id);
         
-        var hasOrders = _db.OrderDetails.Any(od => od.ProductId == entity.ProductId);
-        
-        if (!hasOrders)
-        {
-          _db.Products.Remove(entity);
+        _db.Products.Remove(entity);
 
-          await _db.SaveChangesAsync(token);
-        }
+        await _db.SaveChangesAsync(token);
 
         return Unit.Value;
         

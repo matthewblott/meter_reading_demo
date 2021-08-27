@@ -38,11 +38,7 @@ namespace Ensek.Application.Products.Queries
         public void Mapping(Profile profile)
         {
           profile.CreateMap<Product, Item>()
-            .ForMember(d => d.Id, opt => opt.MapFrom(s => s.ProductId))
-            .ForMember(d => d.SupplierCompanyName,
-              opt => opt.MapFrom(s => s.Supplier != null ? s.Supplier.CompanyName : string.Empty))
-            .ForMember(d => d.CategoryName,
-              opt => opt.MapFrom(s => s.Category != null ? s.Category.CategoryName : string.Empty));
+            .ForMember(d => d.Id, opt => opt.MapFrom(s => s.ProductId));
         }
         
       }

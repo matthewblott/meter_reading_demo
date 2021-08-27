@@ -23,6 +23,7 @@ namespace Ensek.Application.Products.Commands
 
     public class Model
     {
+      public int RowNumber { get; set; }
       public int ProductId { get; set; }
       public string ProductName { get; set; }
       public int? SupplierId { get; set; }
@@ -32,7 +33,8 @@ namespace Ensek.Application.Products.Commands
       public short? UnitsInStock { get; set; }
       public short? UnitsOnOrder { get; set; }
       public short? ReorderLevel { get; set; }
-      public bool Discontinued { get; set; }      
+      public bool Discontinued { get; set; }
+      public bool Imported { get; set; }
     }
     
     public class Validator : AbstractValidator<Command>
@@ -60,7 +62,13 @@ namespace Ensek.Application.Products.Commands
       {
         var products = _fileReader.ReadProductsFile(command.File).ToList();
 
-        foreach (var product in products)
+        var productsToSave = 
+          from p in products
+          where
+            p.Imported
+          select p;
+        
+        foreach (var product in productsToSave)
         {
           var entity = new Product
           {

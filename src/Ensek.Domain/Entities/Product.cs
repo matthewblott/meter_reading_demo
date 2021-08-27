@@ -2,18 +2,8 @@
 {
   using System.Collections.Generic;
 
-  public class Product //: AuditableEntity
+  public class Product
   {
-    public ICollection<OrderDetail> OrderDetails { get; private set; }
-    
-    public Category Category { get; set; }
-    public Supplier Supplier { get; set; }
-    
-    public Product()
-    {
-      OrderDetails = new HashSet<OrderDetail>();
-    }
-
     public int ProductId { get; set; }
     public string ProductName { get; set; }
     public int? SupplierId { get; set; }

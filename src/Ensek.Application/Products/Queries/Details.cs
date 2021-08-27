@@ -1,6 +1,3 @@
-using Ensek.Application.Common.Mappings;
-using Ensek.Domain.Entities;
-
 namespace Ensek.Application.Products.Queries
 {
   using AutoMapper;
@@ -31,12 +28,7 @@ namespace Ensek.Application.Products.Queries
 
       public void Mapping(Profile profile)
       {
-        profile.CreateMap<Product, Model>()
-          .ForMember(d => d.SupplierCompanyName,
-            opt => opt.MapFrom(s => s.Supplier != null ? s.Supplier.CompanyName : string.Empty))
-          .ForMember(d => d.CategoryName,
-            opt => opt.MapFrom(s => s.Category != null ? s.Category.CategoryName : string.Empty));
-        
+        profile.CreateMap<Product, Model>();
       }
 
     }

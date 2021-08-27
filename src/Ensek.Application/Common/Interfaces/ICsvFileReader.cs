@@ -7,7 +7,5 @@ namespace Ensek.Application.Common.Interfaces
   public interface ICsvFileReader
   {
     IEnumerable<Import.Model> ReadProductsFile(IFormFile file);
-    
-    // byte[] BuildProductsFile(IEnumerable<ProductRecordDto> records);
   }
 }
