@@ -17,11 +17,15 @@
         Row #
       </th>
       <th></th>
+      <th>Id</th>
       <th>
-        Id
+        Account Id
       </th>
       <th>
-        Product Name
+        Recorded At
+      </th>
+      <th>
+        Meter Reading
       </th>
       <th></th>
     </tr>
@@ -41,7 +45,13 @@
           @(item.Id > 0 ? item.Id.ToString() : string.Empty)
         </td>
         <td>
+          @(item.AccountId > 0 ? item.AccountId.ToString() : string.Empty)
+        </td>
+        <td>
           @item.RecordedAt
+        </td>
+        <td>
+          @item.Value
         </td>
         <td>
           @if (item.IsValid)

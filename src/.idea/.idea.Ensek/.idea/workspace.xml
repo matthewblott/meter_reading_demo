@@ -13,6 +13,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e4c08adfbbd142eca00752f4e29c0b8428600/e3/57c6c02d/CsvReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/66499f01deda4679b15bab8622ea798135600/F/RazorPageOfT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/242ac7ed2eaa41f6b02b802477e1952e52e00/08/6425dd67/AbstractValidator`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e4c08adfbbd142eca00752f4e29c0b8428600/ef/010c256d/ClassMap`1.cs" root0="SKIP_HIGHLIGHTING" />
@@ -29,7 +30,7 @@
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.C++" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -57,6 +58,36 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Ensek.Tests/TestWebApplicationFactory.cs</url>
+          <line>35</line>
+          <properties documentPath="$PROJECT_DIR$/Ensek.Tests/TestWebApplicationFactory.cs" initialLine="36" containingFunctionPresentation="lambda expression inside method 'ConfigureWebHost'">
+            <startOffsets>
+              <option value="946" />
+            </startOffsets>
+            <endOffsets>
+              <option value="994" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Ensek.WebUI/Features/MeterReadings/MeterReadingsController.cs</url>
+          <line>54</line>
+          <properties documentPath="$PROJECT_DIR$/Ensek.WebUI/Features/MeterReadings/MeterReadingsController.cs" initialLine="54" containingFunctionPresentation="method 'ImportApi'">
+            <startOffsets>
+              <option value="1543" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1578" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="LaunchSettings">
         <watch expression="reading.Value" language="C#" />

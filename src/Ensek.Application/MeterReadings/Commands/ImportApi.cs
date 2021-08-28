@@ -14,13 +14,19 @@ namespace Ensek.Application.MeterReadings.Commands
   using MediatR;
   using Microsoft.AspNetCore.Http;
 
-  public class Import
+  public class ImportApi
   {
-    public class Command : IRequest<IEnumerable<Model>>
+    public class Command : IRequest<Results>
     {
       public IFormFile File { get; set; }
     }
 
+    public class Results
+    {
+      public int Imported { get; set; }
+      public int Failed { get; set; }
+    }
+    
     public class Model
     {
       public int RowNumber { get; set; }
@@ -56,7 +62,7 @@ namespace Ensek.Application.MeterReadings.Commands
       }
     }
     
-    public class Handler : IRequestHandler<Command, IEnumerable<Model>>
+    public class Handler : IRequestHandler<Command, Results>
     {
       private readonly IEnsekDbContext _db;
       private readonly IMapper _mapper;
@@ -81,9 +87,9 @@ namespace Ensek.Application.MeterReadings.Commands
         
       }
       
-      public async Task<IEnumerable<Model>> Handle(Command command, CancellationToken token)
+      public async Task<Results> Handle(Command command, CancellationToken token)
       {
-        var readings = _fileReader.ReadMeterReadingsFile(command.File).ToList();
+        var readings = _fileReader.ReadMeterReadingsFileApi(command.File).ToList();
 
         readings.ForEach(async r =>
         {
@@ -125,7 +131,17 @@ namespace Ensek.Application.MeterReadings.Commands
 
         }
 
-        return readings;
+        var totalRecords = readings.Count;
+        var imported = validReadings.Count();
+        var failed = totalRecords - imported;
+
+        var results = new Results
+        {
+          Imported = imported,
+          Failed = failed,
+        };
+          
+        return results;
 
       }
       

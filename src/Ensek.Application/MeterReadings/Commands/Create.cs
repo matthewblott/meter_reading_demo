@@ -1,3 +1,5 @@
+using System;
+
 namespace Ensek.Application.MeterReadings.Commands
 {
   using System.Threading;
@@ -15,7 +17,7 @@ namespace Ensek.Application.MeterReadings.Commands
       [IgnoreMap]
       public int? Id { get; set; }
       public int AccountId { get; set; }
-      public string RecordedAt { get; set; }
+      public DateTime RecordedAt { get; set; }
       public short Value { get; set; }
     }
 

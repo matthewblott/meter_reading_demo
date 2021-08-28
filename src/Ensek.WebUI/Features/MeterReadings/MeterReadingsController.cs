@@ -6,6 +6,7 @@ namespace Ensek.WebUI.Features.MeterReadings
   using MediatR;
   using Microsoft.AspNetCore.Mvc;
   using Application.MeterReadings.Queries;
+  using Microsoft.AspNetCore.Authorization;
   using Index = Application.MeterReadings.Queries.Index;
 
   public class MeterReadingsController : Controller
@@ -47,9 +48,12 @@ namespace Ensek.WebUI.Features.MeterReadings
     public IActionResult Import() => View();
 
     [HttpPost]
-    public async Task<IActionResult> Import(Import.Command command) 
-      => View(await _mediator.Send(command));
+    public async Task<IActionResult> Import(Import.Command command) => View(await _mediator.Send(command));
 
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<IActionResult> ImportApi(ImportApi.Command command) => Json(await _mediator.Send(command));
+    
   }
   
 }
