@@ -7,11 +7,9 @@
 
   public interface IEnsekDbContext
   {
-    DbSet<Employee> Employees { get; set; }
-    DbSet<EmployeeTerritory> EmployeeTerritories { get; set; }
+    DbSet<Account> Accounts { get; set; }
     DbSet<Role> Groups { get; set; }
-    DbSet<Product> Products { get; set; }
-    DbSet<Territory> Territories { get; set; }
+    DbSet<MeterReading> MeterReadings { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserRole> UserGroups { get; set; }
 

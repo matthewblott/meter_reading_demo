@@ -8,23 +8,16 @@
       <x-divider desktop></x-divider>
     </x-nav-section>
     <x-nav-section expand>
-      <x-divider desktop></x-divider>
       <x-nav-item>
-        <a asp-controller="Employees" asp-action="Index">Employees</a>
+        <a asp-controller="Accounts" asp-action="Index">Accounts</a>
       </x-nav-item>
       <x-divider desktop></x-divider>
       <x-nav-item>
-        <a asp-controller="Products" asp-action="Index">Products</a>
+        <a asp-controller="MeterReadings" asp-action="Index">Meter Readings</a>
       </x-nav-item>
       <x-divider desktop></x-divider>
     </x-nav-section>
     <x-nav-section>
-      <x-nav-item>
-        <form>
-          <input name="search" placeholder="Enter your search">
-          <button>Search</button>
-        </form>
-      </x-nav-item>
       <x-nav-item>
         <form method="post" asp-controller="Account" asp-action="Logout" asp-authorize>
           <button>Logout</button>

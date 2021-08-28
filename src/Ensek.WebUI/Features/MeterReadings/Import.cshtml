@@ -1,0 +1,58 @@
+@model IEnumerable<Ensek.Application.MeterReadings.Commands.Import.Model>
+<form method="post" asp-action="Import" enctype="multipart/form-data">
+  <input name="file" type="file">
+  <button>Upload</button>
+</form>
+
+@if (Model != null)
+{
+  <p>
+    The following were imported. 
+  </p>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>
+        Row #
+      </th>
+      <th></th>
+      <th>
+        Id
+      </th>
+      <th>
+        Product Name
+      </th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+  
+    @foreach (var item in Model)
+    {
+      <tr>
+        <td>
+          @item.RowNumber          
+        </td>
+        <td>
+          @(item.IsValid ? "Imported" : "Failed")
+        </td>
+        <td>
+          @(item.Id > 0 ? item.Id.ToString() : string.Empty)
+        </td>
+        <td>
+          @item.RecordedAt
+        </td>
+        <td>
+          @if (item.IsValid)
+          {
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+          }
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+  
+}
+

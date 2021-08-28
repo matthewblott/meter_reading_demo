@@ -1,0 +1,23 @@
+@model Ensek.Application.Accounts.Commands.Create.Command
+
+<fieldset>
+  <form method="post" asp-action="Create">
+    <x-field>
+      <label>Id</label>
+      <input value="[New]" readonly>
+    </x-field>
+    <x-field>
+      <label asp-for="FirstName"></label>
+      <input asp-for="FirstName">
+      <span asp-validation-for="FirstName"></span>    
+    </x-field>
+    <x-field>
+      <label asp-for="LastName"></label>
+      <input asp-for="LastName">
+      <span asp-validation-for="LastName"></span>    
+    </x-field>
+    <x-field>
+      <button>Save</button>
+    </x-field>
+  </form>
+</fieldset>

@@ -17,11 +17,9 @@ namespace Ensek.Persistence
 
   public class EnsekDbContext : DbContext, IEnsekDbContext, IDbContextTransaction
   {
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<EmployeeTerritory> EmployeeTerritories { get; set; }
+    public DbSet<Account> Accounts { get; set; }
     public DbSet<Role> Groups { get; set; }
-    public DbSet<Product> Products { get; set; }
-    public DbSet<Territory> Territories { get; set; }
+    public DbSet<MeterReading> MeterReadings { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserRole> UserGroups { get; set; }
     private Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? _currentTransaction;

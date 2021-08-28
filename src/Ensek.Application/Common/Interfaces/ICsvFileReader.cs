@@ -2,10 +2,10 @@ namespace Ensek.Application.Common.Interfaces
 {
   using System.Collections.Generic;
   using Microsoft.AspNetCore.Http;
-  using Products.Commands;
+  using MeterReadings.Commands;
 
   public interface ICsvFileReader
   {
-    IEnumerable<Import.Model> ReadProductsFile(IFormFile file);
+    IEnumerable<Import.Model> ReadMeterReadingsFile(IFormFile file);
   }
 }

@@ -1,0 +1,25 @@
+@model Ensek.Application.MeterReadings.Commands.Create.Command
+
+<fieldset>
+  <form method="post" asp-action="Create">
+    <x-field>
+      <label>Id</label>
+      <input value="[New]" readonly>
+    </x-field>
+    <x-field>
+      <label asp-for="RecordedAt"></label>
+      <input asp-for="RecordedAt">
+    </x-field>
+    <x-field>
+      <label asp-for="AccountId"></label>
+      <input asp-for="AccountId">
+    </x-field>
+    <x-field>
+      <label asp-for="Value"></label>
+      <input asp-for="Value">
+    </x-field>
+    <x-field>
+      <button>Save</button>
+    </x-field>
+  </form>
+</fieldset>

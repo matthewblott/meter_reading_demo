@@ -1,25 +1,49 @@
+using System.Linq;
+
 namespace Ensek.Infrastructure.Files
 {
-  using System;
-  using System.Linq;
   using System.Collections.Generic;
   using System.Globalization;
   using System.IO;
   using Application.Common.Interfaces;
-  using Application.Products.Commands;
+  using Application.MeterReadings.Commands;
   using CsvHelper;
   using Microsoft.AspNetCore.Http;
 
   public class CsvFileReader : ICsvFileReader
   {
-    public IEnumerable<Import.Model> ReadProductsFile(IFormFile file)
+    // public IEnumerable<Import.Model> ReadMeterReadingsFile(IFormFile file)
+    // {
+    //   using (var stream = file.OpenReadStream())
+    //   {
+    //     using (var reader = new StreamReader(stream))
+    //     {
+    //       using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+    //       {
+    //         csv.Configuration.HasHeaderRecord = true;
+    //         csv.Configuration.RegisterClassMap<MeterReadingsFileRecordMap>();
+    //         csv.Configuration.ReadingExceptionOccurred = ex => false;
+    //
+    //         var records = csv.GetRecords<Import.Model>();
+    //
+    //         var list = records.ToList();
+    //
+    //         return list;
+    //       }
+    //
+    //     }
+    //
+    //   }
+    // }
+
+    public IEnumerable<Import.Model> ReadMeterReadingsFile(IFormFile file)
     {
       using var stream = file.OpenReadStream();
       using var reader = new StreamReader(stream);
       using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
       
       csv.Configuration.HasHeaderRecord = true;
-      csv.Configuration.RegisterClassMap<ProductFileRecordMap>();
+      csv.Configuration.RegisterClassMap<MeterReadingsFileRecordMap>();
       csv.Configuration.ReadingExceptionOccurred = ex => false;
       csv.Configuration.PrepareHeaderForMatch = (header, index) => header.ToLower();
       csv.Read();
@@ -27,7 +51,7 @@ namespace Ensek.Infrastructure.Files
       csv.ValidateHeader<Import.Model>();
       
       var list = new List<Import.Model>();
-
+    
       var rowNumber = 0;
       
       while (csv.Read())
@@ -35,27 +59,22 @@ namespace Ensek.Infrastructure.Files
         rowNumber++;
         
         var record = csv.GetRecord<Import.Model>();
-
+    
         if (record == null)
         {
           record = new Import.Model();
         }
         else
         {
-          record.Imported = true;
+          record.IsValid = true;
         }
-
+    
         record.RowNumber = rowNumber;
         
         list.Add(record);
-
+    
       }
-
-      // var productsToSave = from element in list
-      //   group element by element.ProductId
-      //   into groups
-      //   select groups.OrderBy(p => p.SupplierId).First();
-      
+    
       return list;
     }
     

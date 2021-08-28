@@ -32,7 +32,7 @@
 </style>
 
 <message-bar>
-  <welcome asp-authenticated>Welcome @User.Identity.Name</welcome><message>@TempData["_message"]</message>
+  <welcome asp-authenticated>Welcome @User.Identity?.Name</welcome><message>@TempData["_message"]</message>
 </message-bar>
 
 <x-main>

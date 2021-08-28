@@ -8,6 +8,6 @@ namespace Ensek.WebUI.Features.Info
   public class InfoController : Controller
   {
     public string OS() => 
-      User?.Identity.IsAuthenticated ?? false ? Environment.OSVersion.ToString() : string.Empty;
+      User?.Identity?.IsAuthenticated ?? false ? Environment.OSVersion.ToString() : string.Empty;
   }
 }
