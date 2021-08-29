@@ -19,11 +19,6 @@ namespace Ensek.Tests
 
   public class MeterReadingsTests
   {
-    [SetUp]
-    public void Setup()
-    {
-    }
-    
     private static DbConnection CreateInMemoryDatabase()
     {
       var connection = new SqliteConnection("Filename=:memory:");

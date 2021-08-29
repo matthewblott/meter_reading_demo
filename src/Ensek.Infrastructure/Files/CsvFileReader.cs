@@ -10,7 +10,7 @@ namespace Ensek.Infrastructure.Files
 
   public class CsvFileReader : ICsvFileReader
   {
-    public IEnumerable<Import.Model> ReadMeterReadingsFile(IFormFile file)
+    public IEnumerable<Import.Model.CsvRow> ReadMeterReadingsFile(IFormFile file)
     {
       using var stream = file.OpenReadStream();
       using var reader = new StreamReader(stream);
@@ -22,9 +22,9 @@ namespace Ensek.Infrastructure.Files
       csv.Configuration.PrepareHeaderForMatch = (header, index) => header.ToLower();
       csv.Read();
       csv.ReadHeader();
-      csv.ValidateHeader<Import.Model>();
+      csv.ValidateHeader<Import.Model.CsvRow>();
       
-      var list = new List<Import.Model>();
+      var list = new List<Import.Model.CsvRow>();
     
       var rowNumber = 0;
       
@@ -32,11 +32,11 @@ namespace Ensek.Infrastructure.Files
       {
         rowNumber++;
         
-        var record = csv.GetRecord<Import.Model>();
+        var record = csv.GetRecord<Import.Model.CsvRow>();
     
         if (record == null)
         {
-          record = new Import.Model();
+          record = new Import.Model.CsvRow();
         }
         else
         {

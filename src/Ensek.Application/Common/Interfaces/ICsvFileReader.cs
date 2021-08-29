@@ -6,6 +6,6 @@ namespace Ensek.Application.Common.Interfaces
 
   public interface ICsvFileReader
   {
-    IEnumerable<Import.Model> ReadMeterReadingsFile(IFormFile file);
+    IEnumerable<Import.Model.CsvRow> ReadMeterReadingsFile(IFormFile file);
   }
 }

@@ -50,7 +50,7 @@ namespace Ensek.WebUI.Features.MeterReadings
     public IActionResult Import() => View();
 
     [HttpPost]
-    public async Task<IActionResult> Import(Import.Command command) => View(await _mediator.Send(command));
+    public async Task<IActionResult> Import(Import.Command command) => Json(await _mediator.Send(command));
     
   }
   

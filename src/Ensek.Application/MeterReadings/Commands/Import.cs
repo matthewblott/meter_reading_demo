@@ -16,22 +16,29 @@ namespace Ensek.Application.MeterReadings.Commands
 
   public class Import
   {
-    public class Command : IRequest<IEnumerable<Model>>
+    public class Command : IRequest<Model>
     {
       public IFormFile File { get; set; }
     }
 
     public class Model
     {
-      public int RowNumber { get; set; }
-      public int Id { get; set; }
-      public int AccountId { get; set; }
-      public DateTime RecordedAt { get; set; }
-      public int Value { get; set; }
-      public bool IsValid { get; set; }
+      public int Imported { get; set; }
+      public int Failed { get; set; }
+      
+      public class CsvRow
+      {
+        public int RowNumber { get; set; }
+        public int Id { get; set; }
+        public int AccountId { get; set; }
+        public DateTime RecordedAt { get; set; }
+        public int Value { get; set; }
+        public bool IsValid { get; set; }
+      }
+
     }
     
-    public class ModelValidator : AbstractValidator<Model>
+    public class ModelValidator : AbstractValidator<Model.CsvRow>
     {
       private IEnsekDbContext _db;
       
@@ -56,7 +63,7 @@ namespace Ensek.Application.MeterReadings.Commands
       }
     }
     
-    public class Handler : IRequestHandler<Command, IEnumerable<Model>>
+    public class Handler : IRequestHandler<Command, Model>
     {
       private readonly IEnsekDbContext _db;
       private readonly IMapper _mapper;
@@ -69,19 +76,19 @@ namespace Ensek.Application.MeterReadings.Commands
         _fileReader = fileReader;
       }
 
-      private bool IsNotDuplicate(IList<Model> values, Model model)
+      private bool IsNotDuplicate(IList<Model.CsvRow> values, Model.CsvRow csvRow)
       {
-        if(values.Count(v => v.AccountId == model.AccountId) <= 1)
+        if(values.Count(v => v.AccountId == csvRow.AccountId) <= 1)
         {
           return true;
         }
       
         // If it's the first appearance then it's a valid record
-        return values.First(v => v.AccountId == model.AccountId).RowNumber == model.RowNumber;
+        return values.First(v => v.AccountId == csvRow.AccountId).RowNumber == csvRow.RowNumber;
         
       }
       
-      public async Task<IEnumerable<Model>> Handle(Command command, CancellationToken token)
+      public async Task<Model> Handle(Command command, CancellationToken token)
       {
         var readings = _fileReader.ReadMeterReadingsFile(command.File).ToList();
 
@@ -125,7 +132,17 @@ namespace Ensek.Application.MeterReadings.Commands
 
         }
 
-        return readings;
+        var totalNumberOfRows = readings.Count;
+        var importedNumber = validReadings.Count();
+        var failedNumber = totalNumberOfRows - importedNumber;
+        
+        var model = new Model
+        {
+          Imported = importedNumber,
+          Failed = failedNumber,
+        };
+
+        return model;
 
       }
       
