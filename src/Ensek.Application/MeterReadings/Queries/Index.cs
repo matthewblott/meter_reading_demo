@@ -1,5 +1,6 @@
 namespace Ensek.Application.MeterReadings.Queries
 {
+  using System;
   using System.Threading;
   using System.Threading.Tasks;
   using AutoMapper;
@@ -28,8 +29,8 @@ namespace Ensek.Application.MeterReadings.Queries
       {
         public int Id { get; set; }
         public int? AccountId { get; set; }
-        public string RecordedAt { get; set; }
-        public short? Value { get; set; }
+        public DateTime RecordedAt { get; set; }
+        public int Value { get; set; }
 
         public void Mapping(Profile profile)
         {

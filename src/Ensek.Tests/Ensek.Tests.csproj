@@ -15,7 +15,19 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ensek.WebUI\Ensek.WebUI.csproj" />
+        <ProjectReference Include="..\Ensek.WebUI\Ensek.WebUI.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Scripts\Accounts.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Scripts\MeterReadings.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Documents\meter_readings.csv">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

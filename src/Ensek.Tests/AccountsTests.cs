@@ -1,14 +1,11 @@
 namespace Ensek.Tests
 {
+  using System;
   using System.Data.Common;
   using System.IO;
   using System.Linq;
   using System.Threading;
-  using System.Threading.Tasks;
-  using Application.Common.Interfaces;
   using AutoMapper;
-  using Infrastructure.Files;
-  using Microsoft.AspNetCore.Http;
   using Microsoft.Data.Sqlite;
   using Microsoft.EntityFrameworkCore;
   using Microsoft.Extensions.Configuration;
@@ -17,13 +14,8 @@ namespace Ensek.Tests
   using Persistence;
   using WebUI;
 
-  public class MeterReadingsTests
+  public class AccountsTests
   {
-    [SetUp]
-    public void Setup()
-    {
-    }
-    
     private static DbConnection CreateInMemoryDatabase()
     {
       var connection = new SqliteConnection("Filename=:memory:");
@@ -37,16 +29,16 @@ namespace Ensek.Tests
       cmd.ExecuteNonQuery();
 
       return connection;
+      
     }
-
+    
     [Test]
-    public async Task Should_be_able_to_upload_meter_readings_file_and_print_results()
+    public void Should_return_paged_records_correctly()
     {
       var host = new HostEnvironment();
       var services = new ServiceCollection();
       
-      IConfigurationRoot configuration = new ConfigurationBuilder()
-        .Build();
+      IConfigurationRoot configuration = new ConfigurationBuilder().Build();
       
       var startup = new Startup(configuration, host);
 
@@ -55,8 +47,7 @@ namespace Ensek.Tests
       var provider = services.BuildServiceProvider();
       
       var descriptor = services.SingleOrDefault(
-        d => d.ServiceType ==
-             typeof(DbContextOptions<EnsekDbContext>));
+        d => d.ServiceType == typeof(DbContextOptions<EnsekDbContext>));
       
       if (descriptor != null)
       {
@@ -73,28 +64,22 @@ namespace Ensek.Tests
       var options = builder.UseSqlite(CreateInMemoryDatabase()).Options;
       var db = new EnsekDbContext(options);
       var mapper = provider.GetService<IMapper>()!;
-
-      ICsvFileReader fileReader = new CsvFileReader();
-      
-      var handler = new Application.MeterReadings.Commands.Import.Handler(db, mapper, fileReader);
+      var handler = new Ensek.Application.Accounts.Queries.Index.Handler(db, mapper);
       var token = new CancellationToken();
-      var command = new Application.MeterReadings.Commands.Import.Command();
+      var query = new Application.Accounts.Queries.Index.Query { Page = 2 };
+      var results = handler.Handle(query, token);
+      var result = results.Result;
+      var items = result.Items;
 
-      const string filePath = "Documents/meter_readings.csv";
-
-      await using var stream = new MemoryStream((await File.ReadAllBytesAsync(filePath, token)).ToArray());
-      var formFile = new FormFile(stream, 0, stream.Length, "streamFile","meter_readings.csv");
-
-      command.File = formFile;
+      var firstItem = items.First();
+      var lastItem = items.Last();
       
-      await handler.Handle(command, token);
- 
-      const int expectedNumberOfNewDatabaseRecords = 24;
+      var expectedFirstItemFirstName = "Pam";
+      var expectedLastItemFirstName = "Gladys";
       
-      var count = await db.MeterReadings.CountAsync(cancellationToken: token);
+      Assert.IsTrue(firstItem.FirstName == expectedFirstItemFirstName);
+      Assert.IsTrue(lastItem.FirstName == expectedLastItemFirstName);
 
-      Assert.True(count == expectedNumberOfNewDatabaseRecords);
-      
     }
     
   }

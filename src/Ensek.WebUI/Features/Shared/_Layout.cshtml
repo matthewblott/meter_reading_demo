@@ -31,17 +31,11 @@
 
 </style>
 
-<message-bar>
-  <welcome asp-authenticated>Welcome @User.Identity?.Name</welcome><message>@TempData["_message"]</message>
-</message-bar>
-
 <x-main>
   <h1>@ViewData["Title"]</h1>
   
   @RenderBody()
 </x-main>
 
-<partial name="_Footer" asp-authorize />
-`
 </body>
 </html>

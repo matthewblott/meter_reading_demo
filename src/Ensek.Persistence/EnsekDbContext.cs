@@ -8,7 +8,6 @@ namespace Ensek.Persistence
   using System.Threading;
   using System.Threading.Tasks;
   using Application.Common.Interfaces;
-  using Common;
   using Domain.Entities;
   using FluentValidation;
   using FluentValidation.Results;
@@ -18,21 +17,10 @@ namespace Ensek.Persistence
   public class EnsekDbContext : DbContext, IEnsekDbContext, IDbContextTransaction
   {
     public DbSet<Account> Accounts { get; set; }
-    public DbSet<Role> Groups { get; set; }
     public DbSet<MeterReading> MeterReadings { get; set; }
-    public DbSet<User> Users { get; set; }
-    public DbSet<UserRole> UserGroups { get; set; }
     private Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? _currentTransaction;
 
     public EnsekDbContext(DbContextOptions<EnsekDbContext> options) : base(options)
-    {
-    }
-
-    public EnsekDbContext(
-      DbContextOptions<EnsekDbContext> options,
-      ICurrentUserService currentUserService,
-      IDateTime dateTime)
-      : base(options)
     {
     }
 

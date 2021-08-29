@@ -52,49 +52,6 @@ namespace Ensek.Infrastructure.Files
       return list;
     }
     
-    public IEnumerable<ImportApi.Model> ReadMeterReadingsFileApi(IFormFile file)
-    {
-      using var stream = file.OpenReadStream();
-      using var reader = new StreamReader(stream);
-      using var csv = new CsvReader(reader, new CultureInfo("en-gb"));
-      
-      csv.Configuration.HasHeaderRecord = true;
-      csv.Configuration.RegisterClassMap<MeterReadingsFileRecordMap>();
-      csv.Configuration.ReadingExceptionOccurred = ex => false;
-      csv.Configuration.PrepareHeaderForMatch = (header, index) => header.ToLower();
-      csv.Read();
-      csv.ReadHeader();
-      
-      //csv.ValidateHeader<ImportApi.Model>();
-      
-      var list = new List<ImportApi.Model>();
-    
-      var rowNumber = 0;
-      
-      while (csv.Read())
-      {
-        rowNumber++;
-        
-        var record = csv.GetRecord<ImportApi.Model>();
-    
-        if (record == null)
-        {
-          record = new ImportApi.Model();
-        }
-        else
-        {
-          record.IsValid = true;
-        }
-    
-        record.RowNumber = rowNumber;
-        
-        list.Add(record);
-    
-      }
-    
-      return list;
-    }
-    
   }
   
 }

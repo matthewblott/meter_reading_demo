@@ -1,3 +1,5 @@
+using System;
+
 namespace Ensek.Application.MeterReadings.Queries
 {
   using AutoMapper;
@@ -18,9 +20,9 @@ namespace Ensek.Application.MeterReadings.Queries
     public class Model : IMapFrom<MeterReading>
     {
       public int Id { get; set; }
-      public string RecordedAt { get; set; }
-      public int? AccountId { get; set; }
-      public short? Value { get; set; }
+      public DateTime RecordedAt { get; set; }
+      public int AccountId { get; set; }
+      public int Value { get; set; }
 
       public void Mapping(Profile profile)
       {

@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Ensek.Domain.Entities
+﻿namespace Ensek.Domain.Entities
 {
+  using System;
   using System.Collections.Generic;
 
   public class MeterReading

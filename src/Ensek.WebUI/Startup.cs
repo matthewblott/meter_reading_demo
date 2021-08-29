@@ -7,20 +7,15 @@ namespace Ensek.WebUI
 {
   using Application;
   using Application.Common.Interfaces;
-  using Application.Common.Validators;
-  using Common;
   using Filters;
   using FluentValidation.AspNetCore;
-  using Microsoft.AspNetCore.Authorization;
   using Microsoft.AspNetCore.Builder;
   using Microsoft.AspNetCore.Hosting;
-  using Microsoft.AspNetCore.Mvc.Authorization;
   using Microsoft.Extensions.Configuration;
   using Microsoft.Extensions.DependencyInjection;
   using Infrastructure;
   using Persistence;
   using Services;
-  using Validators;
 
   public class Startup
   {
@@ -40,8 +35,7 @@ namespace Ensek.WebUI
       services.AddInfrastructure(Configuration, Environment);
       services.AddPersistence(connectionString);
       services.AddApplication();
-      services.AddUrlHelper();
-      services.AddCurrentUserService();
+      services.AddUrlHelper(); 
       services.AddHttpContextAccessor();
       services.AddControllersWithViews(options => options.Filters.Add(typeof(DbContextTransactionFilter)))
         .AddNewtonsoftJson()
@@ -49,28 +43,9 @@ namespace Ensek.WebUI
         .AddFluentValidation(fv =>
         {
           fv.RegisterValidatorsFromAssemblyContaining<IEnsekDbContext>();
-          fv.ConfigureClientsideValidation(clientSideValidation =>
-          {
-            clientSideValidation.Add(typeof(RemoteValidator), (context, rule, validator) => new RemoteClientValidator(rule, validator));
-          });
         });
 
-      var builder = services.AddMvc(o =>
-      {
-        var policy = new AuthorizationPolicyBuilder()
-          .RequireAuthenticatedUser()
-          .Build();
-        o.Filters.Add(new AuthorizeFilter(policy));
-      });
-
-      var settings = Configuration.GetSection(nameof(RazorSettings)).Get<RazorSettings>();
-      var isAllowed = (settings ?? new RazorSettings()).AllowRuntimeCompilation;
-      
-      if (isAllowed)
-      {
-        builder.AddRazorRuntimeCompilation();
-      }
-      
+      services.AddMvc();
       services.AddRouting(option => option.LowercaseUrls = true);
 
     }
@@ -79,9 +54,7 @@ namespace Ensek.WebUI
     {
       app.UseDeveloperExceptionPage();
       app.UseStaticFiles();
-      app.UseTurboLinks();
       app.UseRouting();
-      app.UseAuthentication();
       app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
     }
     

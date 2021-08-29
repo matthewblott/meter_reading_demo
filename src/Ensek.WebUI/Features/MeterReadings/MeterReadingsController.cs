@@ -26,7 +26,8 @@ namespace Ensek.WebUI.Features.MeterReadings
     {
       await _mediator.Send(command);
 
-      return NoContent();
+      return RedirectToAction("Index");
+
     }
     
     [HttpPost]
@@ -42,17 +43,14 @@ namespace Ensek.WebUI.Features.MeterReadings
     {
       await _mediator.Send(command);
 
-      return NoContent();
+      return RedirectToAction("Index");
+
     }
     
     public IActionResult Import() => View();
 
     [HttpPost]
     public async Task<IActionResult> Import(Import.Command command) => View(await _mediator.Send(command));
-
-    [AllowAnonymous]
-    [HttpPost]
-    public async Task<IActionResult> ImportApi(ImportApi.Command command) => Json(await _mediator.Send(command));
     
   }
   

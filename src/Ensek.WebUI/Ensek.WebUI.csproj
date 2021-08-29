@@ -34,5 +34,8 @@
     <_ContentIncludedByDefault Remove="Features\Customers\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="Features\Customers\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Features\Customers\PostTest.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Shared\Scripts\_Calendar.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Shared\Scripts\_Validation.cshtml" />
+    <_ContentIncludedByDefault Remove="Features\Account\Login.cshtml" />
   </ItemGroup>
 </Project>

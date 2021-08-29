@@ -22,7 +22,7 @@ namespace Ensek.WebUI.Features.Accounts
     {
       await _mediator.Send(command);
 
-      return NoContent();
+      return RedirectToAction("Index");
     }
     
     [HttpPost]
@@ -38,7 +38,8 @@ namespace Ensek.WebUI.Features.Accounts
     {
       await _mediator.Send(command);
 
-      return NoContent();
+      return RedirectToAction("Index");
+
     }
     
   }
