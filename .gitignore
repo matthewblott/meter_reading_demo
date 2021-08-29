@@ -358,9 +358,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-
-# Web files
-src/Northwind.WebUI/wwwroot/*.html
-
-# Database files
-db/*
