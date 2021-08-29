@@ -5,6 +5,7 @@
 To run simply enter the following in a terminal and browse to ```http://localhost:5000```:
 
 ```
+git clone https://github.com/matthewblott/meter_reading_demo
 cd src/Ensek.WebUI/
 dotnet run
 ```
