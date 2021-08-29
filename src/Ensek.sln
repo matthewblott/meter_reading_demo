@@ -23,8 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{8D5E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ensek.Tests", "Ensek.Tests\Ensek.Tests.csproj", "{FF886AF3-7796-4B13-AFEF-72A9AEBCACCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ensek.Console", "Ensek.Console\Ensek.Console.csproj", "{019DCA7C-BBAC-4590-9124-3A8F2258E165}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,10 +53,6 @@ Global
 		{FF886AF3-7796-4B13-AFEF-72A9AEBCACCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF886AF3-7796-4B13-AFEF-72A9AEBCACCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF886AF3-7796-4B13-AFEF-72A9AEBCACCE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{019DCA7C-BBAC-4590-9124-3A8F2258E165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{019DCA7C-BBAC-4590-9124-3A8F2258E165}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{019DCA7C-BBAC-4590-9124-3A8F2258E165}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{019DCA7C-BBAC-4590-9124-3A8F2258E165}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,7 +64,6 @@ Global
 		{BCB2063A-EB5B-4E1E-AA3C-AC8EA9F2283C} = {2479B6D3-D3FE-48AC-A35C-4B06ED1A6E19}
 		{308FC50A-478D-43D4-A334-AC01C518626E} = {2479B6D3-D3FE-48AC-A35C-4B06ED1A6E19}
 		{FF886AF3-7796-4B13-AFEF-72A9AEBCACCE} = {8D5E76DA-2CA3-4546-B2F2-83FC43021350}
-		{019DCA7C-BBAC-4590-9124-3A8F2258E165} = {8D5E76DA-2CA3-4546-B2F2-83FC43021350}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D5D0CA3-C6B8-436C-82B0-39820C8A13FA}
