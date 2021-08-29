@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ensek.Application\Ensek.Application.csproj" />
-    <ProjectReference Include="..\Ensek.Common\Ensek.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
