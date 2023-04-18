@@ -121,9 +121,15 @@ namespace Ensek.Persistence
       }
     }
     
-    public IEnumerable<IProperty> Keys(Type type) 
-      => Model.FindEntityType(type).FindPrimaryKey().Properties.ToList();
-    
+    public IEnumerable<IProperty> Keys(Type type)
+    {
+      var entityType = Model.FindEntityType(type); 
+      var primaryKey = entityType?.FindPrimaryKey();
+      var properties = primaryKey?.Properties;
+      var model = properties?.ToList() ?? new List<IProperty>();
+      
+      return model;
+    }
   }
   
 }

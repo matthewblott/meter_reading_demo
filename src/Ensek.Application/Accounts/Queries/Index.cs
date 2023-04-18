@@ -10,7 +10,7 @@ namespace Ensek.Application.Accounts.Queries
   using Common.Mappings;
   using Domain.Entities;
   using MediatR;
-  using Microsoft.EntityFrameworkCore;
+  //using Microsoft.EntityFrameworkCore;
   using X.PagedList;
 
   public class Index

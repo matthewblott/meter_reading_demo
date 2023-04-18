@@ -1,5 +1,6 @@
 namespace Ensek.WebUI.Services
 {
+  using Microsoft.AspNetCore.Mvc;
   using Microsoft.AspNetCore.Mvc.Infrastructure;
   using Microsoft.AspNetCore.Mvc.Routing;
   using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ namespace Ensek.WebUI.Services
     {
       services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
       services.AddScoped(x => {
-        var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
+        var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext ?? new ActionContext();
         var factory = x.GetRequiredService<IUrlHelperFactory>();
         return factory.GetUrlHelper(actionContext);
       });

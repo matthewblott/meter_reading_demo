@@ -5,6 +5,7 @@
 
 namespace Ensek.WebUI
 {
+  using System;
   using Application;
   using Application.Common.Interfaces;
   using Filters;
@@ -31,6 +32,11 @@ namespace Ensek.WebUI
     public void ConfigureServices(IServiceCollection services)
     {
       var connectionString = Configuration.GetConnectionString("EnsekDatabase");
+
+      if (string.IsNullOrEmpty(connectionString))
+      {
+        throw new NullReferenceException();
+      }
       
       services.AddInfrastructure(Configuration, Environment);
       services.AddPersistence(connectionString);
